@@ -1,0 +1,1997 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中高考倒计时导航</title>
+    <link href="https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #323130;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: 'MiSans', 'Noto Sans SC', sans-serif;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .greeting {
+            font-size: 32px;
+            font-family: 'Noto Serif SC', serif;
+            line-height: 1.4;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .countdowns-container {
+            display: flex;
+            gap: 20px; /* 增加两个倒计时之间的间距 */
+        }
+        
+        .countdown-item {
+            text-align: right;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .countdown-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .countdown-label {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .gaokao-label {
+            color: #e53935;
+        }
+        
+        .zhongkao-label {
+            color: #0078d4;
+        }
+        
+        .countdown-days {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 48px;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+        
+        .gaokao-days {
+            color: #e53935;
+        }
+        
+        .zhongkao-days {
+            color: #0078d4;
+        }
+        
+        .daily-quote {
+            font-size: 22px;
+            color: #605e5c;
+            margin-bottom: 25px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e1dfdd;
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 500;
+        }
+        
+        .info-bar {
+            margin-bottom: 25px;
+            padding: 12px 15px;
+            background-color: rgba(0, 120, 212, 0.1);
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        
+        .time-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .time-label {
+            margin-right: 8px;
+            font-weight: 500;
+            color: #0078d4;
+        }
+        
+        .current-time {
+            font-weight: 600;
+            color: #0078d4;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        
+        .weather-location-container {
+            color: #0078d4;
+        }
+        
+        .weather-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .weather-icon {
+            margin-right: 8px;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .weather-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .weather-main {
+            display: flex;
+            align-items: center;
+        }
+        
+        .weather-details {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .weather-alert {
+            margin-left: 10px;
+            padding: 2px 6px;
+            background-color: #ff9800;
+            color: white;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .location-info {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .location-icon {
+            margin-right: 4px;
+            width: 14px;
+            height: 14px;
+        }
+        
+        .location-edit-btn {
+            margin-left: 8px;
+            padding: 2px 6px;
+            font-size: 12px;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .location-edit-btn:hover {
+            background-color: #106ebe;
+        }
+        
+        .search-container {
+            display: flex;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e1dfdd;
+            background: white;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: white;
+            font-family: 'MiSans', 'Noto Sans SC', sans-serif;
+        }
+        
+        .search-button {
+            background-color: #0078d4;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        
+        .search-button:hover {
+            background-color: #106ebe;
+        }
+        
+        .search-button svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+        
+        .tabs-container {
+            margin-bottom: 15px;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: #f3f2f1;
+            border-radius: 6px 6px 0 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .tab {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            cursor: pointer;
+            border-right: 1px solid #e1dfdd;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+            font-family: 'MiSans', 'Noto Sans SC', sans-serif;
+        }
+        
+        .tab.active {
+            background-color: #edebe9;
+        }
+        
+        .tab-icon {
+            margin-right: 6px;
+            width: 16px;
+            height: 16px;
+            fill: #323130;
+        }
+        
+        .websites-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .website-card {
+            background-color: white;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: 1px solid #e1dfdd;
+        }
+        
+        .website-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .website-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f3f2f1;
+        }
+        
+        .website-icon img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+        
+        .website-name {
+            font-size: 13px;
+            color: #323130;
+            font-weight: 500;
+            font-family: 'MiSans', 'Noto Sans SC', sans-serif;
+        }
+        
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            font-family: 'ZCOOL XiaoWei', serif;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .fullscreen-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .fullscreen-countdown {
+            font-size: 120px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .fullscreen-label {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        
+        .fullscreen-date {
+            font-size: 24px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-input {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 80px;
+            text-align: center;
+        }
+        
+        .countdown-btn {
+            padding: 8px 16px;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .countdown-btn:hover {
+            background-color: #106ebe;
+        }
+        
+        .progress-container {
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #e53935;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+        
+        /* 手动倒计时样式 */
+        .manual-countdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            color: white;
+            font-family: 'ZCOOL XiaoWei', serif;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .manual-countdown-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .manual-countdown-title {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        
+        .manual-countdown-display {
+            font-size: 100px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* 位置编辑弹窗 */
+        .location-edit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .location-edit-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .location-edit-modal {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .location-edit-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #323130;
+        }
+        
+        .location-search-container {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        
+        .location-search-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #e1dfdd;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            font-family: 'MiSans', 'Noto Sans SC', sans-serif;
+        }
+        
+        .location-search-btn {
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            padding: 0 12px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .location-edit-form {
+            margin-bottom: 20px;
+        }
+        
+        .location-edit-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e1dfdd;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-family: 'MiSans', 'Noto Sans SC', sans-serif;
+        }
+        
+        .location-edit-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .location-edit-btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .location-edit-cancel {
+            background-color: #f3f2f1;
+            border: 1px solid #e1dfdd;
+            color: #323130;
+        }
+        
+        .location-edit-confirm {
+            background-color: #0078d4;
+            border: none;
+            color: white;
+        }
+        
+        /* 搜索结果样式 */
+        .location-search-results {
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #e1dfdd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .location-search-result-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .location-search-result-item:hover {
+            background-color: #f3f2f1;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .header {
+                flex-direction: column;
+            }
+            
+            .countdowns-container {
+                width: 100%;
+                margin-top: 15px;
+                flex-direction: row; /* 在移动设备上保持水平排列 */
+                justify-content: space-between; /* 移动设备上分散排列 */
+            }
+            
+            .countdown-item {
+                text-align: center; /* 移动设备上居中显示 */
+                flex: 1; /* 平均分配宽度 */
+            }
+            
+            .greeting {
+                font-size: 28px;
+            }
+            
+            .daily-quote {
+                font-size: 20px;
+            }
+            
+            .countdown-label {
+                font-size: 18px;
+            }
+            
+            .countdown-days {
+                font-size: 36px;
+            }
+            
+            .info-bar {
+                align-items: flex-start;
+            }
+            
+            .weather-container {
+                margin-top: 10px;
+            }
+            
+            .websites-container {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 12px;
+            }
+            
+            .tab {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            
+            .fullscreen-countdown, .manual-countdown-display {
+                font-size: 80px;
+            }
+            
+            .fullscreen-label, .manual-countdown-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+    <!-- 网页字体预加载 -->
+    <link rel="preload" href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@400;500;600;700&amp;family=ZCOOL+XiaoWei&amp;display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.cn/css2?family=Noto+Serif+SC:wght@400;500;600;700&amp;family=ZCOOL+XiaoWei&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1 class="greeting">下午好！<br>今天有什么计划？</h1>
+            <div class="daily-quote" id="dailyQuote">笔下生花，梦想开花！</div>
+        </div>
+        <div class="countdowns-container">
+            <!-- 先显示中考倒计时，再显示高考倒计时 -->
+            <div class="countdown-item" id="zhongkaoContainer">
+                <div class="countdown-label zhongkao-label">距离中考还有</div>
+                <div class="countdown-days zhongkao-days" id="zhongkaoDays">--天</div>
+            </div>
+            <div class="countdown-item" id="gaokaoContainer">
+                <div class="countdown-label gaokao-label">距离高考还有</div>
+                <div class="countdown-days gaokao-days" id="gaokaoDays">247天</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-bar">
+        <div class="time-container" id="timeContainer">
+            <span class="time-label">当前中国标准时间</span>
+            <span class="current-time" id="currentTime">2025年10月3日 星期五 09:53:52</span>
+        </div>
+        <div class="weather-location-container">
+            <div class="weather-container">
+                <svg class="weather-icon" viewBox="0 0 24 24">
+                    <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h2v3h-2v-3zm8.04 2.21l1.8 1.79-1.41 1.41-1.79-1.8 1.4-1.4zM17 20.5h3v2h-3v-2zm-6-1v3h2v-3h-2zm-6.76-1.71l-1.8 1.79 1.41 1.41 1.79-1.8-1.4-1.4zM20 10.5h3v2h-3v-2zm-9-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
+                </svg>
+                <div class="weather-info">
+                    <div class="weather-main">
+                        <span id="weatherTemp">--°C</span>
+                        <span id="weatherCondition" class="weather-condition">--</span>
+                        <span class="weather-alert" id="weatherAlert"></span>
+                    </div>
+                    <div class="weather-details" id="weatherDetails">湿度: -- | 风向: -- | 风力: --级</div>
+                </div>
+            </div>
+            <div class="location-info">
+                <svg class="location-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+                </svg>
+                <span id="locationText">广东省广州市</span>
+                <button class="location-edit-btn" id="locationEditBtn">修改</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 位置编辑弹窗 - 精确到城市级别 -->
+    <div class="location-edit-overlay" id="locationEditOverlay">
+        <div class="location-edit-modal">
+            <div class="location-edit-title">选择地区</div>
+            
+            <!-- 新增：位置搜索输入框 -->
+            <div class="location-search-container">
+                <input type="text" class="location-search-input" id="locationSearchInput" placeholder="搜索城市...">
+                <button class="location-search-btn" id="locationSearchBtn">搜索</button>
+            </div>
+            
+            <!-- 搜索结果区域 -->
+            <div class="location-search-results" id="locationSearchResults"></div>
+            
+            <div class="location-edit-form">
+                <select class="location-edit-select" id="provinceSelect">
+                    <option value="">请选择省份</option>
+                    <!-- 省份选项将通过JavaScript动态生成 -->
+                </select>
+                <select class="location-edit-select" id="citySelect" disabled="">
+                    <option value="">请先选择省份</option>
+                    <!-- 城市选项将通过JavaScript动态生成 -->
+                </select>
+            </div>
+            <div class="location-edit-buttons">
+                <button class="location-edit-btn location-edit-cancel" id="cancelLocationEdit">取消</button>
+                <button class="location-edit-btn location-edit-confirm" id="confirmLocationEdit">确定</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="搜索内容...">
+        <button class="search-button">
+            <svg viewBox="0 0 24 24">
+                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+            </svg>
+        </button>
+    </div>
+    
+    <div class="tabs-container">
+        <div class="tabs" id="tabs">
+            <!-- 标签将通过JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <div class="websites-container" id="websitesContainer">
+        <!-- 网站卡片将通过JavaScript动态生成 -->
+    </div>
+    
+    <!-- 中高考全屏倒计时 -->
+    <div class="fullscreen-overlay" id="examFullscreenOverlay">
+        <button class="close-fullscreen" id="closeExamFullscreen">×</button>
+        <div class="fullscreen-label" id="examFullscreenLabel">距离高考还有</div>
+        <div class="fullscreen-countdown" id="examFullscreenCountdown">100天00:00:00</div>
+        <div class="fullscreen-date" id="examFullscreenDate">2025年6月7日</div>
+    </div>
+    
+    <!-- 手动倒计时 -->
+    <div class="manual-countdown-overlay" id="manualCountdownOverlay">
+        <button class="close-fullscreen" id="closeManualCountdown">×</button>
+        <div class="manual-countdown-title">自定义倒计时</div>
+        
+        <div class="countdown-controls">
+            <input type="number" class="countdown-input" id="manualHoursInput" placeholder="时" min="0" max="23">
+            <input type="number" class="countdown-input" id="manualMinutesInput" placeholder="分" min="0" max="59">
+            <input type="number" class="countdown-input" id="manualSecondsInput" placeholder="秒" min="0" max="59">
+            <input type="number" class="countdown-input" id="manualMsInput" placeholder="毫秒" min="0" max="99">
+            <button class="countdown-btn" id="startManualCountdown">开始</button>
+            <button class="countdown-btn" id="resetManualCountdown">重置</button>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="manualProgressBar"></div>
+        </div>
+        
+        <div class="manual-countdown-display" id="manualCountdownDisplay">00:00:00.00</div>
+    </div>
+
+    <script>
+        // 高德地图API配置 - 同时包含Key和安全密钥
+        const AMAP_CONFIG = {
+            apiKey: "e825ac7ee4b5456bb0ded79dcb782674",      // API Key
+            securityKey: "1e5eb96d419f38639dded6ba558f6b9c"  // 安全密钥
+        };
+        
+        // 省份中考时间配置
+        const zhongkaoSchedule = {
+            "重庆市": { start: [6, 12], end: [6, 14] },
+            "四川省": { start: [6, 12], end: [6, 14] },
+            "山东省": { start: [6, 13], end: [6, 15] },
+            "上海市": { start: [6, 14], end: [6, 15] },
+            "安徽省": { start: [6, 14], end: [6, 16] },
+            "江苏省": { start: [6, 17], end: [6, 19] },
+            "甘肃省": { start: [6, 16], end: [6, 18] },
+            "云南省": { start: [6, 16], end: [6, 18] },
+            "江西省": { start: [6, 17], end: [6, 19] },
+            "吉林省": { start: [6, 18], end: [6, 20] },
+            "湖南省": { start: [6, 18], end: [6, 20] },
+            "贵州省": { start: [6, 20], end: [6, 22] },
+            "湖北省": { start: [6, 20], end: [6, 22] },
+            "山西省": { start: [6, 20], end: [6, 23] },
+            "河北省": { start: [6, 21], end: [6, 23] },
+            "陕西省": { start: [6, 21], end: [6, 23] },
+            "辽宁省": { start: [6, 21], end: [6, 23] },
+            "浙江省": { start: [6, 21], end: [6, 22] },
+            "天津市": { start: [6, 21], end: [6, 23] },
+            "河南省": { start: [6, 22], end: [6, 23] },
+            "福建省": { start: [6, 19], end: [6, 21] },
+            "北京市": { start: [6, 24], end: [6, 25] },
+            "广西壮族自治区": { start: [6, 24], end: [6, 27] },
+            "海南省": { start: [6, 25], end: [6, 27] },
+            "黑龙江省": { start: [6, 25], end: [6, 27] },
+            "内蒙古自治区": { start: [6, 26], end: [6, 28] },
+            "广东省": { start: [6, 30], end: [7, 2] },
+            "宁夏回族自治区": { start: [6, 28], end: [6, 30] },
+            "西藏自治区": { start: [7, 3], end: [7, 5] }
+        };
+
+        // 完整的省市区数据 - 只包含省和市两级，不含区和县
+        const regionData = {
+            // 直辖市（省字段为"直辖市"，市字段为直辖市名称）
+            "直辖市": {
+                "北京市": [],
+                "上海市": [],
+                "天津市": [],
+                "重庆市": []
+            },
+            
+            // 省及下辖地级市
+            "河北省": {
+                "石家庄市": [], "唐山市": [], "秦皇岛市": [], "邯郸市": [], "邢台市": [], "保定市": [], 
+                "张家口市": [], "承德市": [], "沧州市": [], "廊坊市": [], "衡水市": []
+            },
+            "山西省": {
+                "太原市": [], "大同市": [], "阳泉市": [], "长治市": [], "晋城市": [], "朔州市": [], 
+                "晋中市": [], "运城市": [], "忻州市": [], "临汾市": [], "吕梁市": []
+            },
+            "辽宁省": {
+                "沈阳市": [], "大连市": [], "鞍山市": [], "抚顺市": [], "本溪市": [], "丹东市": [], 
+                "锦州市": [], "营口市": [], "阜新市": [], "辽阳市": [], "盘锦市": [], "铁岭市": [], 
+                "朝阳市": [], "葫芦岛市": []
+            },
+            "吉林省": {
+                "长春市": [], "吉林市": [], "四平市": [], "辽源市": [], "通化市": [], "白山市": [], 
+                "松原市": [], "白城市": [], "延边朝鲜族自治州": []
+            },
+            "黑龙江省": {
+                "哈尔滨市": [], "齐齐哈尔市": [], "鸡西市": [], "鹤岗市": [], "双鸭山市": [], "大庆市": [], 
+                "伊春市": [], "佳木斯市": [], "七台河市": [], "牡丹江市": [], "黑河市": [], "绥化市": [], 
+                "大兴安岭地区": []
+            },
+            "江苏省": {
+                "南京市": [], "无锡市": [], "徐州市": [], "常州市": [], "苏州市": [], "南通市": [], 
+                "连云港市": [], "淮安市": [], "盐城市": [], "扬州市": [], "镇江市": [], "泰州市": [], "宿迁市": []
+            },
+            "浙江省": {
+                "杭州市": [], "宁波市": [], "温州市": [], "嘉兴市": [], "湖州市": [], "绍兴市": [], 
+                "金华市": [], "衢州市": [], "舟山市": [], "台州市": [], "丽水市": []
+            },
+            "安徽省": {
+                "合肥市": [], "芜湖市": [], "蚌埠市": [], "淮南市": [], "马鞍山市": [], "淮北市": [], 
+                "铜陵市": [], "安庆市": [], "黄山市": [], "滁州市": [], "阜阳市": [], "宿州市": [], 
+                "六安市": [], "亳州市": [], "池州市": [], "宣城市": []
+            },
+            "福建省": {
+                "福州市": [], "厦门市": [], "莆田市": [], "三明市": [], "泉州市": [], "漳州市": [], 
+                "南平市": [], "龙岩市": [], "宁德市": []
+            },
+            "江西省": {
+                "南昌市": [], "景德镇市": [], "萍乡市": [], "九江市": [], "新余市": [], "鹰潭市": [], 
+                "赣州市": [], "吉安市": [], "宜春市": [], "抚州市": [], "上饶市": []
+            },
+            "山东省": {
+                "济南市": [], "青岛市": [], "淄博市": [], "枣庄市": [], "东营市": [], "烟台市": [], 
+                "潍坊市": [], "济宁市": [], "泰安市": [], "威海市": [], "日照市": [], "临沂市": [], 
+                "德州市": [], "聊城市": [], "滨州市": [], "菏泽市": []
+            },
+            "河南省": {
+                "郑州市": [], "开封市": [], "洛阳市": [], "平顶山市": [], "安阳市": [], "鹤壁市": [], 
+                "新乡市": [], "焦作市": [], "濮阳市": [], "许昌市": [], "漯河市": [], "三门峡市": [], 
+                "南阳市": [], "商丘市": [], "信阳市": [], "周口市": [], "驻马店市": [], "济源市": []
+            },
+            "湖北省": {
+                "武汉市": [], "黄石市": [], "十堰市": [], "宜昌市": [], "襄阳市": [], "鄂州市": [], 
+                "荆门市": [], "孝感市": [], "荆州市": [], "黄冈市": [], "咸宁市": [], "随州市": [], 
+                "恩施土家族苗族自治州": [], "仙桃市": [], "潜江市": [], "天门市": [], "神农架林区": []
+            },
+            "湖南省": {
+                "长沙市": [], "株洲市": [], "湘潭市": [], "衡阳市": [], "邵阳市": [], "岳阳市": [], 
+                "常德市": [], "张家界市": [], "益阳市": [], "郴州市": [], "永州市": [], "怀化市": [], 
+                "娄底市": [], "湘西土家族苗族自治州": []
+            },
+            "广东省": {
+                "广州市": [], "深圳市": [], "珠海市": [], "汕头市": [], "佛山市": [], "韶关市": [], 
+                "湛江市": [], "肇庆市": [], "江门市": [], "茂名市": [], "惠州市": [], "梅州市": [], 
+                "汕尾市": [], "河源市": [], "阳江市": [], "清远市": [], "东莞市": [], "中山市": [], 
+                "潮州市": [], "揭阳市": [], "云浮市": []
+            },
+            "海南省": {
+                "海口市": [], "三亚市": [], "三沙市": [], "儋州市": []
+            },
+            "四川省": {
+                "成都市": [], "自贡市": [], "攀枝花市": [], "泸州市": [], "德阳市": [], "绵阳市": [], 
+                "广元市": [], "遂宁市": [], "内江市": [], "乐山市": [], "南充市": [], "眉山市": [], 
+                "宜宾市": [], "广安市": [], "达州市": [], "雅安市": [], "巴中市": [], "资阳市": [], 
+                "阿坝藏族羌族自治州": [], "甘孜藏族自治州": [], "凉山彝族自治州": []
+            },
+            "贵州省": {
+                "贵阳市": [], "六盘水市": [], "遵义市": [], "安顺市": [], "毕节市": [], "铜仁市": [], 
+                "黔西南布依族苗族自治州": [], "黔东南苗族侗族自治州": [], "黔南布依族苗族自治州": []
+            },
+            "云南省": {
+                "昆明市": [], "曲靖市": [], "玉溪市": [], "保山市": [], "昭通市": [], "丽江市": [], 
+                "普洱市": [], "临沧市": [], "楚雄彝族自治州": [], "红河哈尼族彝族自治州": [], 
+                "文山壮族苗族自治州": [], "西双版纳傣族自治州": [], "大理白族自治州": [], 
+                "德宏傣族景颇族自治州": [], "怒江傈僳族自治州": [], "迪庆藏族自治州": []
+            },
+            "陕西省": {
+                "西安市": [], "铜川市": [], "宝鸡市": [], "咸阳市": [], "渭南市": [], "延安市": [], 
+                "汉中市": [], "榆林市": [], "安康市": [], "商洛市": []
+            },
+            "甘肃省": {
+                "兰州市": [], "嘉峪关市": [], "金昌市": [], "白银市": [], "天水市": [], "武威市": [], 
+                "张掖市": [], "平凉市": [], "酒泉市": [], "庆阳市": [], "定西市": [], "陇南市": [], 
+                "临夏回族自治州": [], "甘南藏族自治州": []
+            },
+            "青海省": {
+                "西宁市": [], "海东市": [], "海北藏族自治州": [], "黄南藏族自治州": [], 
+                "海南藏族自治州": [], "果洛藏族自治州": [], "玉树藏族自治州": [], "海西蒙古族藏族自治州": []
+            },
+            "台湾省": {
+                "台北市": [], "新北市": [], "桃园市": [], "台中市": [], "台南市": [], "高雄市": [], 
+                "基隆市": [], "新竹市": [], "嘉义市": [], "新竹县": [], "苗栗县": [], "彰化县": [], 
+                "南投县": [], "云林县": [], "嘉义县": [], "屏东县": [], "宜兰县": [], "花莲县": [], "台东县": [], "澎湖县": []
+            },
+            
+            // 自治区及下辖地级市/自治州
+            "内蒙古自治区": {
+                "呼和浩特市": [], "包头市": [], "乌海市": [], "赤峰市": [], "通辽市": [], "鄂尔多斯市": [], 
+                "呼伦贝尔市": [], "巴彦淖尔市": [], "乌兰察布市": [], "兴安盟": [], "锡林郭勒盟": [], 
+                "阿拉善盟": []
+            },
+            "广西壮族自治区": {
+                "南宁市": [], "柳州市": [], "桂林市": [], "梧州市": [], "北海市": [], "防城港市": [], 
+                "钦州市": [], "贵港市": [], "玉林市": [], "百色市": [], "贺州市": [], "河池市": [], 
+                "来宾市": [], "崇左市": []
+            },
+            "宁夏回族自治区": {
+                "银川市": [], "石嘴山市": [], "吴忠市": [], "固原市": [], "中卫市": []
+            },
+            "新疆维吾尔自治区": {
+                "乌鲁木齐市": [], "克拉玛依市": [], "吐鲁番市": [], "哈密市": [], "昌吉回族自治州": [], 
+                "博尔塔拉蒙古自治州": [], "巴音郭楞蒙古自治州": [], "阿克苏地区": [], 
+                "克孜勒苏柯尔克孜自治州": [], "喀什地区": [], "和田地区": [], "伊犁哈萨克自治州": [], 
+                "塔城地区": [], "阿勒泰地区": [], "石河子市": [], "阿拉尔市": [], "图木舒克市": [], 
+                "五家渠市": [], "北屯市": [], "铁门关市": [], "双河市": [], "可克达拉市": [], 
+                "昆玉市": [], "胡杨河市": [], "新星市": []
+            },
+            "西藏自治区": {
+                "拉萨市": [], "日喀则市": [], "昌都市": [], "林芝市": [], "山南市": [], "那曲市": [], "阿里地区": []
+            },
+            
+            // 特别行政区
+            "香港特别行政区": {
+                "香港特别行政区": []
+            },
+            "澳门特别行政区": {
+                "澳门特别行政区": []
+            }
+        };
+
+        // 网站分类配置
+        const tabsConfig = [
+            {
+                tab_name: "电教",
+                tab_icon: "M11 21h2v-2h-2v2zm0-4h2v-2h-2v2zm0-12h2V3h-2v2zm0 8h2v-2h-2v2zm0-4h2V7h-2v2zm-4 8h2v-2H7v2zm0-8h2V7H7v2zm0-4h2V3H7v2zm0 8h2v-2H7v2zm-4 8h2V3H3v18zM19 9h2V7h-2v2zm-4 12h2v-2h-2v2zm4-4h2v-2h-2v2zm0-14v2h2V3h-2zm0 10h2v-2h-2v2zm0 8h2v-2h-2v2zm-4-8h2v-2h-2v2zm0-8h2V3h-2v2z"
+            },
+            {
+                tab_name: "娱乐",
+                tab_icon: "M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm6 10h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V7h4v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"
+            },
+            {
+                tab_name: "新闻",
+                tab_icon: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+            },
+            {
+                tab_name: "教育",
+                tab_icon: "M12 3L1 9l4 2.18v6.24L12 21l7-3.58v-6.24L23 9 12 3zm6.5 10.5L12 16.5l-6.5-3.5V10L12 13.5l6.5-3.5v3.5z"
+            }
+        ];
+
+        // 网站配置 - 图标路径改为本地icon文件夹
+        const websitesConfig = [
+            // 电教网站
+            {
+                tab_name: "电教",
+                web_name: "智教联盟",
+                web_icon: "icon/智教联盟.png",
+                web_url: "https://example.com/zhijiao"
+            },
+            {
+                tab_name: "电教",
+                web_name: "思锐工作室",
+                web_icon: "icon/思锐工作室.png",
+                web_url: "https://example.com/sirui"
+            },
+            {
+                tab_name: "电教",
+                web_name: "aiwb",
+                web_icon: "icon/aiwb.png",
+                web_url: "https://example.com/aiwb"
+            },
+            {
+                tab_name: "电教",
+                web_name: "classisland",
+                web_icon: "icon/classisland.png",
+                web_url: "https://example.com/classisland"
+            },
+            {
+                tab_name: "电教",
+                web_name: "classwidgets",
+                web_icon: "icon/classwidgets.png",
+                web_url: "https://example.com/classwidgets"
+            },
+            {
+                tab_name: "电教",
+                web_name: "智绘教",
+                web_icon: "icon/智绘教.png",
+                web_url: "https://example.com/zhihuijiao"
+            },
+            {
+                tab_name: "电教",
+                web_name: "ICC-ce",
+                web_icon: "icon/ICC-ce.png",
+                web_url: "https://example.com/icc-ce"
+            },
+            
+            // 娱乐网站
+            {
+                tab_name: "娱乐",
+                web_name: "哔哩哔哩",
+                web_icon: "icon/哔哩哔哩.png",
+                web_url: "https://www.bilibili.com"
+            },
+            {
+                tab_name: "娱乐",
+                web_name: "网易云音乐",
+                web_icon: "icon/网易云音乐.png",
+                web_url: "https://music.163.com"
+            },
+            {
+                tab_name: "娱乐",
+                web_name: "酷狗音乐",
+                web_icon: "icon/酷狗音乐.png",
+                web_url: "https://www.kugou.com"
+            },
+            {
+                tab_name: "娱乐",
+                web_name: "QQ音乐",
+                web_icon: "icon/QQ音乐.png",
+                web_url: "https://y.qq.com"
+            },
+            {
+                tab_name: "娱乐",
+                web_name: "抖音",
+                web_icon: "icon/抖音.png",
+                web_url: "https://www.douyin.com"
+            },
+            
+            // 新闻网站
+            {
+                tab_name: "新闻",
+                web_name: "央视网",
+                web_icon: "icon/央视网.png",
+                web_url: "https://www.cctv.com"
+            },
+            {
+                tab_name: "新闻",
+                web_name: "新华网",
+                web_icon: "icon/新华网.png",
+                web_url: "https://www.xinhuanet.com"
+            },
+            {
+                tab_name: "新闻",
+                web_name: "搜狐新闻",
+                web_icon: "icon/搜狐新闻.png",
+                web_url: "https://news.sohu.com"
+            },
+            {
+                tab_name: "新闻",
+                web_name: "腾讯新闻",
+                web_icon: "icon/腾讯新闻.png",
+                web_url: "https://news.qq.com"
+            },
+            
+            // 教育网站
+            {
+                tab_name: "教育",
+                web_name: "鸿合官网",
+                web_icon: "icon/鸿合官网.png",
+                web_url: "https://www.honghe-tech.com"
+            },
+            {
+                tab_name: "教育",
+                web_name: "希沃易+",
+                web_icon: "icon/希沃易+.png",
+                web_url: "https://e.seewo.com"
+            },
+            {
+                tab_name: "教育",
+                web_name: "国家中小学智慧教育平台",
+                web_icon: "icon/国家中小学智慧教育平台.png",
+                web_url: "https://www.zxx.edu.cn"
+            }
+        ];
+
+        // 高考每日一言
+        const dailyQuotes = [
+            "恭祝，此战青云平步！",
+            "十年磨一剑，今朝试锋芒！",
+            "乘风破浪，金榜题名！",
+            "笔下生花，梦想开花！",
+            "全力以赴，不负韶华！",
+            "沉着冷静，发挥最佳！",
+            "志存高远，脚踏实地！",
+            "信心满满，前程似锦！"
+        ];
+
+        // 页面加载后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 提高性能：使用requestAnimationFrame更新动画
+            const requestAnimationFrame = window.requestAnimationFrame || 
+                                        window.mozRequestAnimationFrame ||
+                                        window.webkitRequestAnimationFrame ||
+                                        window.msRequestAnimationFrame;
+            window.requestAnimationFrame = requestAnimationFrame;
+            
+            // 设置每日一言
+            const dailyQuoteElement = document.getElementById('dailyQuote');
+            const randomQuote = dailyQuotes[Math.floor(Math.random() * dailyQuotes.length)];
+            dailyQuoteElement.textContent = randomQuote;
+            
+            // 定位信息和省份
+            let userProvince = "";
+            let userCity = "";
+            let cityCode = "";
+            let manualLocationSet = false; // 标记是否已手动设置位置
+            
+            // 获取DOM元素
+            const provinceSelect = document.getElementById('provinceSelect');
+            const citySelect = document.getElementById('citySelect');
+            const locationSearchInput = document.getElementById('locationSearchInput');
+            const locationSearchBtn = document.getElementById('locationSearchBtn');
+            const locationSearchResults = document.getElementById('locationSearchResults');
+            
+            // 初始化省份选择下拉框
+            Object.keys(regionData).forEach(province => {
+                const option = document.createElement('option');
+                option.value = province;
+                option.textContent = province;
+                provinceSelect.appendChild(option);
+            });
+            
+            // 省份选择变化时更新城市列表
+            provinceSelect.addEventListener('change', function() {
+                const selectedProvince = this.value;
+                
+                // 清空城市选择
+                citySelect.innerHTML = '<option value="">请选择城市</option>';
+                
+                if (selectedProvince && regionData[selectedProvince]) {
+                    // 启用城市选择
+                    citySelect.disabled = false;
+                    
+                    // 添加城市选项
+                    Object.keys(regionData[selectedProvince]).forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    });
+                } else {
+                    // 禁用城市选择
+                    citySelect.disabled = true;
+                }
+            });
+            
+            // 城市搜索功能
+            function searchLocations(query) {
+                if (!query || query.length < 2) {
+                    locationSearchResults.style.display = 'none';
+                    return;
+                }
+                
+                // 清空之前的搜索结果
+                locationSearchResults.innerHTML = '';
+                locationSearchResults.style.display = 'block';
+                
+                // 从regionData中搜索匹配的省份或城市
+                let results = [];
+                
+                // 搜索省份
+                Object.keys(regionData).forEach(province => {
+                    if (province.includes(query)) {
+                        results.push({
+                            type: 'province',
+                            name: province,
+                            value: province
+                        });
+                    }
+                    
+                    // 搜索该省份下的城市
+                    Object.keys(regionData[province]).forEach(city => {
+                        if (city.includes(query)) {
+                            results.push({
+                                type: 'city',
+                                name: `${province} - ${city}`,
+                                province: province,
+                                city: city,
+                                value: city
+                            });
+                        }
+                    });
+                });
+                
+                // 如果有结果，显示出来
+                if (results.length > 0) {
+                    results.forEach(result => {
+                        const item = document.createElement('div');
+                        item.className = 'location-search-result-item';
+                        item.textContent = result.name;
+                        
+                        item.addEventListener('click', function() {
+                            if (result.type === 'province') {
+                                // 选择省份
+                                provinceSelect.value = result.value;
+                                const event = new Event('change');
+                                provinceSelect.dispatchEvent(event);
+                            } else {
+                                // 选择城市
+                                provinceSelect.value = result.province;
+                                const event = new Event('change');
+                                provinceSelect.dispatchEvent(event);
+                                
+                                // 延迟设置城市，确保城市列表已加载
+                                setTimeout(() => {
+                                    if (citySelect.querySelector(`option[value="${result.city}"]`)) {
+                                        citySelect.value = result.city;
+                                    }
+                                }, 100);
+                            }
+                            
+                            // 清空搜索结果
+                            locationSearchResults.innerHTML = '';
+                            locationSearchResults.style.display = 'none';
+                            locationSearchInput.value = '';
+                        });
+                        
+                        locationSearchResults.appendChild(item);
+                    });
+                } else {
+                    const noResult = document.createElement('div');
+                    noResult.className = 'location-search-result-item';
+                    noResult.textContent = '没有找到匹配的地区';
+                    locationSearchResults.appendChild(noResult);
+                }
+            }
+            
+            // 搜索按钮点击事件
+            locationSearchBtn.addEventListener('click', function() {
+                searchLocations(locationSearchInput.value.trim());
+            });
+            
+            // 搜索框回车事件
+            locationSearchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchLocations(this.value.trim());
+                }
+            });
+            
+            // 点击其他区域关闭搜索结果
+            document.addEventListener('click', function(e) {
+                if (!locationSearchContainer.contains(e.target)) {
+                    locationSearchResults.innerHTML = '';
+                    locationSearchResults.style.display = 'none';
+                }
+            });
+            
+            const locationSearchContainer = document.querySelector('.location-search-container');
+            
+            // 设置高考倒计时
+            function calculateGaokaoDays() {
+                const today = new Date();
+                let year = today.getFullYear();
+                let gaokaoDate = new Date(year, 5, 7); // 6月7日
+                
+                // 如果今年的高考已经过去，则计算下一年的高考
+                if (today > gaokaoDate) {
+                    gaokaoDate = new Date(year + 1, 5, 7);
+                }
+                
+                const diffTime = gaokaoDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                return {
+                    days: diffDays,
+                    date: gaokaoDate
+                };
+            }
+            
+            // 设置中考倒计时
+            function calculateZhongkaoDays(province) {
+                if (!province || !zhongkaoSchedule[province]) {
+                    return { days: "--", date: null };
+                }
+                
+                const today = new Date();
+                let year = today.getFullYear();
+                const [month, day] = zhongkaoSchedule[province].start;
+                let zhongkaoDate = new Date(year, month - 1, day); // 月份从0开始
+                
+                // 如果今年的中考已经过去，则计算下一年的中考
+                if (today > zhongkaoDate) {
+                    zhongkaoDate = new Date(year + 1, month - 1, day);
+                }
+                
+                const diffTime = zhongkaoDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                return {
+                    days: diffDays,
+                    date: zhongkaoDate
+                };
+            }
+            
+            // 更新高考倒计时显示
+            function updateGaokaoDisplay() {
+                const result = calculateGaokaoDays();
+                document.getElementById('gaokaoDays').textContent = `${result.days}天`;
+                return result;
+            }
+            
+            // 更新中考倒计时显示
+            function updateZhongkaoDisplay() {
+                if (!userProvince) return;
+                
+                const result = calculateZhongkaoDays(userProvince);
+                document.getElementById('zhongkaoDays').textContent = `${result.days}天`;
+                return result;
+            }
+            
+            // 初始化高考倒计时
+            updateGaokaoDisplay();
+            
+            // 设置当前时间
+            function updateCurrentTime() {
+                const now = new Date();
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    weekday: 'long',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                };
+                const timeString = now.toLocaleDateString('zh-CN', options);
+                document.getElementById('currentTime').textContent = timeString;
+            }
+            
+            // 初始化当前时间
+            updateCurrentTime();
+            // 每秒更新一次时间
+            setInterval(updateCurrentTime, 1000);
+            
+            // 创建包含安全密钥的请求头
+            function createAmapHeaders() {
+                return {
+                    'X-AMAP-Key': AMAP_CONFIG.apiKey,
+                    'X-AMAP-Security-Key': AMAP_CONFIG.securityKey,
+                    'Content-Type': 'application/json'
+                };
+            }
+            
+            // 使用高德地图API获取天气信息 - 带安全密钥
+            function getWeatherByGaode(cityCode) {
+                const weatherUrl = `https://restapi.amap.com/v3/weather/weatherInfo?city=${cityCode}&extensions=all`;
+                
+                return fetch(weatherUrl, {
+                    method: 'GET',
+                    headers: createAmapHeaders() // 添加包含安全密钥的请求头
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "1" && data.lives && data.lives.length > 0) {
+                        return {
+                            live: data.lives[0],
+                            forecasts: data.forecasts && data.forecasts.length > 0 ? data.forecasts[0] : null
+                        };
+                    } else {
+                        throw new Error("获取天气信息失败: " + (data.info || '未知错误'));
+                    }
+                });
+            }
+            
+            // 使用高德地图API获取城市编码 - 带安全密钥
+            function getCityCodeByLocation(lng, lat) {
+                const geocodeUrl = `https://restapi.amap.com/v3/geocode/regeo?location=${lng},${lat}&extensions=base`;
+                
+                return fetch(geocodeUrl, {
+                    method: 'GET',
+                    headers: createAmapHeaders() // 添加包含安全密钥的请求头
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "1" && data.regeocode && data.regeocode.addressComponent) {
+                        const addressComponent = data.regeocode.addressComponent;
+                        return {
+                            cityCode: addressComponent.citycode || addressComponent.adcode,
+                            province: addressComponent.province,
+                            city: addressComponent.city || addressComponent.district
+                        };
+                    } else {
+                        throw new Error("获取城市编码失败: " + (data.info || '未知错误'));
+                    }
+                });
+            }
+            
+            // 获取天气预警信息 - 带安全密钥
+            function getWeatherAlert(cityCode) {
+                const alertUrl = `https://restapi.amap.com/v3/weather/alarm?city=${cityCode}`;
+                
+                return fetch(alertUrl, {
+                    method: 'GET',
+                    headers: createAmapHeaders() // 添加包含安全密钥的请求头
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "1" && data.alarms && data.alarms.length > 0) {
+                        return data.alarms[0];
+                    }
+                    return null;
+                });
+            }
+            
+            // 从手动设置的位置获取天气
+            function getWeatherFromManualLocation() {
+                if (!userProvince || !userCity) return Promise.reject("未设置手动位置");
+                
+                const address = `${userProvince}${userCity}`;
+                const cityUrl = `https://restapi.amap.com/v3/geocode/geo?address=${encodeURIComponent(userCity)}&city=${encodeURIComponent(userProvince)}`;
+                
+                return fetch(cityUrl, {
+                    method: 'GET',
+                    headers: createAmapHeaders()
+                })
+                .then(response => response.json())
+                .then(geoData => {
+                    if (geoData.status === "1" && geoData.geocodes && geoData.geocodes.length > 0) {
+                        const adcode = geoData.geocodes[0].adcode;
+                        cityCode = adcode;
+                        return getWeatherByGaode(adcode);
+                    } else {
+                        throw new Error("无法将手动设置的城市名转换为编码: " + (geoData.info || '未知错误'));
+                    }
+                });
+            }
+            
+            // 获取天气和位置信息
+            function getWeatherAndLocation() {
+                // 优先使用手动设置的位置
+                if (manualLocationSet && userProvince && userCity) {
+                    console.log("使用手动设置的位置获取天气");
+                    getWeatherFromManualLocation()
+                        .then(weatherData => {
+                            updateWeatherDisplay(weatherData);
+                        })
+                        .catch(error => {
+                            console.error('使用手动位置获取天气失败:', error);
+                            document.getElementById('weatherTemp').textContent = '无法获取天气信息';
+                        });
+                    return;
+                }
+                
+                // 尝试使用GPS获取更精确的位置
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        position => {
+                            const lng = position.coords.longitude;
+                            const lat = position.coords.latitude;
+                            
+                            // 使用高德API获取城市编码和位置信息
+                            getCityCodeByLocation(lng, lat)
+                                .then(locationInfo => {
+                                    cityCode = locationInfo.cityCode;
+                                    userProvince = locationInfo.province;
+                                    userCity = locationInfo.city;
+                                    
+                                    // 显示位置信息
+                                    const locationText = `${userProvince}${userCity}`;
+                                    document.getElementById('locationText').textContent = locationText;
+                                    
+                                    // 在下拉框中选中当前省份
+                                    if (provinceSelect.querySelector(`option[value="${userProvince}"]`)) {
+                                        provinceSelect.value = userProvince;
+                                        
+                                        // 触发省份选择事件，加载城市列表
+                                        const event = new Event('change');
+                                        provinceSelect.dispatchEvent(event);
+                                        
+                                        // 选中城市
+                                        setTimeout(() => {
+                                            if (citySelect.querySelector(`option[value="${userCity}"]`)) {
+                                                citySelect.value = userCity;
+                                            }
+                                        }, 100);
+                                    }
+                                    
+                                    // 更新中考倒计时
+                                    updateZhongkaoDisplay();
+                                    
+                                    // 获取天气信息
+                                    getWeatherByGaode(cityCode)
+                                        .then(weatherData => {
+                                            updateWeatherDisplay(weatherData);
+                                        })
+                                        .catch(error => {
+                                            console.error('获取天气信息失败:', error);
+                                            document.getElementById('weatherTemp').textContent = '无法获取天气信息';
+                                        });
+                                })
+                                .catch(error => {
+                                    console.error('获取城市编码失败:', error);
+                                    fallbackLocationAndWeather();
+                                });
+                        },
+                        error => {
+                            console.log('GPS定位失败，使用IP定位:', error);
+                            fallbackLocationAndWeather();
+                        }
+                    );
+                } else {
+                    console.log('浏览器不支持地理定位，使用IP定位');
+                    fallbackLocationAndWeather();
+                }
+            }
+            
+            // 更新天气显示
+            function updateWeatherDisplay(weatherData) {
+                const liveWeather = weatherData.live;
+                
+                // 更新天气信息显示
+                document.getElementById('weatherTemp').textContent = `${liveWeather.temperature}°C `;
+                document.getElementById('weatherCondition').textContent = liveWeather.weather;
+                document.getElementById('weatherDetails').textContent = 
+                    `湿度: ${liveWeather.humidity}% | 风向: ${liveWeather.winddirection} | 风力: ${liveWeather.windpower}级`;
+                
+                // 更新天气图标
+                updateWeatherIcon(liveWeather.weather);
+                
+                // 获取天气预警
+                getWeatherAlert(cityCode)
+                    .then(alert => {
+                        const alertElement = document.getElementById('weatherAlert');
+                        if (alert) {
+                            alertElement.textContent = `${alert.level}${alert.type}`;
+                            // 根据预警级别设置不同颜色
+                            switch(alert.level) {
+                                case "蓝色":
+                                    alertElement.style.backgroundColor = "#1E88E5";
+                                    break;
+                                case "黄色":
+                                    alertElement.style.backgroundColor = "#FFC107";
+                                    break;
+                                case "橙色":
+                                    alertElement.style.backgroundColor = "#FF9800";
+                                    break;
+                                case "红色":
+                                    alertElement.style.backgroundColor = "#F44336";
+                                    break;
+                            }
+                        } else {
+                            alertElement.textContent = "";
+                        }
+                    });
+            }
+            
+            // 备选方案：使用IP定位获取位置
+            function fallbackLocationAndWeather() {
+                // 如果已手动设置位置，直接使用
+                if (manualLocationSet && userProvince && userCity) {
+                    console.log("自动定位失败，使用手动设置的位置");
+                    getWeatherFromManualLocation()
+                        .then(weatherData => {
+                            updateWeatherDisplay(weatherData);
+                        })
+                        .catch(error => {
+                            console.error('使用手动位置获取天气失败:', error);
+                            document.getElementById('weatherTemp').textContent = '无法获取天气信息';
+                        });
+                    return;
+                }
+                
+                // 否则尝试IP定位
+                fetch('https://ipapi.co/json/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const city = data.city;
+                        const region = data.region;
+                        const country = data.country_name;
+                        
+                        // 提取省份信息
+                        userProvince = region.includes('自治区') || region.includes('省') || 
+                                      region.includes('市') ? region : `${region}省`;
+                        userCity = city;
+                        
+                        document.getElementById('locationText').textContent = `${userProvince}${userCity}`;
+                        
+                        // 在下拉框中选中当前省份
+                        if (provinceSelect.querySelector(`option[value="${userProvince}"]`)) {
+                            provinceSelect.value = userProvince;
+                            
+                            // 触发省份选择事件，加载城市列表
+                            const event = new Event('change');
+                            provinceSelect.dispatchEvent(event);
+                            
+                            // 尝试选中城市
+                            setTimeout(() => {
+                                if (citySelect.querySelector(`option[value="${userCity}"]`)) {
+                                    citySelect.value = userCity;
+                                }
+                            }, 100);
+                        }
+                        
+                        // 更新中考倒计时
+                        updateZhongkaoDisplay();
+                        
+                        // 由于没有经纬度，尝试使用城市名获取天气
+                        const cityUrl = `https://restapi.amap.com/v3/geocode/geo?address=${encodeURIComponent(city)}&city=${encodeURIComponent(region)}`;
+                        
+                        fetch(cityUrl, {
+                            method: 'GET',
+                            headers: createAmapHeaders() // 添加包含安全密钥的请求头
+                        })
+                        .then(response => response.json())
+                        .then(geoData => {
+                            if (geoData.status === "1" && geoData.geocodes && geoData.geocodes.length > 0) {
+                                const adcode = geoData.geocodes[0].adcode;
+                                return getWeatherByGaode(adcode);
+                            } else {
+                                throw new Error("无法将城市名转换为编码: " + (geoData.info || '未知错误'));
+                            }
+                        })
+                        .then(weatherData => {
+                            updateWeatherDisplay(weatherData);
+                        })
+                        .catch(error => {
+                            console.error('备选方案获取天气失败:', error);
+                            document.getElementById('weatherTemp').textContent = '无法获取天气信息';
+                        });
+                    })
+                    .catch(error => {
+                        console.error('IP定位失败:', error);
+                        document.getElementById('locationText').textContent = '无法获取位置信息';
+                        document.getElementById('weatherTemp').textContent = '无法获取天气信息';
+                    });
+            }
+            
+            // 根据天气状况更新图标
+            function updateWeatherIcon(condition) {
+                const weatherIcon = document.querySelector('.weather-icon path');
+                
+                // 标准化天气状况
+                const weather = condition.toLowerCase();
+                
+                if (weather.includes('晴')) {
+                    weatherIcon.setAttribute('d', 'M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h2v3h-2v-3zm8.04 2.21l1.8 1.79-1.41 1.41-1.79-1.8 1.4-1.4zM17 20.5h3v2h-3v-2zm-6-1v3h2v-3h-2zm-6.76-1.71l-1.8 1.79 1.41 1.41 1.79-1.8-1.4-1.4zM20 10.5h3v2h-3v-2zm-9-4c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z');
+                } else if (weather.includes('云') || weather.includes('阴')) {
+                    weatherIcon.setAttribute('d', 'M12 7c2.76 0 5 2.24 5 5s-2.24 5-5 5m0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z');
+                } else if (weather.includes('雨')) {
+                    weatherIcon.setAttribute('d', 'M16 18v-2h1v-3H7v3h1v2H6v-4c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v4h-2zM12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z');
+                } else if (weather.includes('雪')) {
+                    weatherIcon.setAttribute('d', 'M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zm-1.41-6.36l1.41 1.41-1.41 1.41.71.71h3.65v-1.41h-2.24l.71-.71-1.41-1.41-.71.71-2.12 2.12.71.71 2.12-2.12.71-.71z');
+                } else if (weather.includes('雷')) {
+                    weatherIcon.setAttribute('d', 'M19.07 14.88L21.1 17.67C21.29 17.96 21.28 18.42 21.05 18.72L19.42 20.72C19.2 21.02 18.75 21.03 18.45 20.85L15.97 19.25C15.67 19.07 15.33 18.96 15 18.93V21.05C15 21.25 14.85 21.43 14.65 21.47L11.65 21.97C11.45 22 11.25 21.86 11.18 21.66L9.08 17.66C8.94 17.36 8.95 17 9.12 16.7L11.12 14.7C11.29 14.4 11.64 14.38 11.94 14.53L14.44 16.13C14.74 16.29 15.08 16.39 15.43 16.42H13.31C13.11 16.12 12.97 15.82 12.89 15.52L10.89 11.52C10.75 11.22 10.76 10.92 10.93 10.62L12.93 8.62C13.1 8.32 13.45 8.3 13.75 8.45L16.25 10.05C16.55 10.21 16.89 10.31 17.24 10.34V8.22C17.24 8.02 17.38 7.82 17.58 7.78L20.58 7.28C20.78 7.24 20.98 7.38 21.05 7.58L23.15 11.58C23.29 11.88 23.28 12.18 23.11 12.48L21.11 14.48C20.94 14.78 20.59 14.8 20.29 14.65L19.07 14.88zM13 13H11V7H13V13z');
+                } else if (weather.includes('雾') || weather.includes('霾')) {
+                    weatherIcon.setAttribute('d', 'M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0 10c2.8 0 5-2.2 5-5h-2c0 1.7-1.3 3-3 3s-3-1.3-3-3h-2c0 2.8 2.2 5 5 5z');
+                }
+            }
+            
+            // 获取天气和位置信息（使用setTimeout延迟加载，提高初始页面加载速度）
+            setTimeout(getWeatherAndLocation, 500);
+            
+            // 考试全屏倒计时功能
+            const gaokaoContainer = document.getElementById('gaokaoContainer');
+            const zhongkaoContainer = document.getElementById('zhongkaoContainer');
+            const examFullscreenOverlay = document.getElementById('examFullscreenOverlay');
+            const examFullscreenCountdown = document.getElementById('examFullscreenCountdown');
+            const examFullscreenLabel = document.getElementById('examFullscreenLabel');
+            const examFullscreenDate = document.getElementById('examFullscreenDate');
+            const closeExamFullscreen = document.getElementById('closeExamFullscreen');
+            
+            let examType = "高考"; // 默认高考
+            let examInterval;
+            
+            function updateExamFullscreenCountdown() {
+                const today = new Date();
+                let examDate;
+                
+                if (examType === "高考") {
+                    const result = calculateGaokaoDays();
+                    examDate = result.date;
+                } else {
+                    const result = calculateZhongkaoDays(userProvince);
+                    examDate = result.date;
+                }
+                
+                if (!examDate) return;
+                
+                const diffTime = examDate - today;
+                const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+                
+                examFullscreenCountdown.textContent = `${days}天${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            function openExamFullscreen(type) {
+                examType = type;
+                examFullscreenLabel.textContent = `距离${examType}还有`;
+                
+                // 设置日期显示
+                let examDate;
+                if (examType === "高考") {
+                    const result = calculateGaokaoDays();
+                    examDate = result.date;
+                } else {
+                    const result = calculateZhongkaoDays(userProvince);
+                    examDate = result.date;
+                }
+                
+                if (examDate) {
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    examFullscreenDate.textContent = examDate.toLocaleDateString('zh-CN', options);
+                }
+                
+                updateExamFullscreenCountdown();
+                examFullscreenOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // 每秒更新倒计时
+                clearInterval(examInterval);
+                examInterval = setInterval(updateExamFullscreenCountdown, 1000);
+            }
+            
+            gaokaoContainer.addEventListener('click', () => openExamFullscreen("高考"));
+            zhongkaoContainer.addEventListener('click', () => openExamFullscreen("中考"));
+            
+            closeExamFullscreen.addEventListener('click', function() {
+                examFullscreenOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                clearInterval(examInterval);
+            });
+            
+            // 手动倒计时功能
+            const timeContainer = document.getElementById('timeContainer');
+            const manualCountdownOverlay = document.getElementById('manualCountdownOverlay');
+            const manualCountdownDisplay = document.getElementById('manualCountdownDisplay');
+            const manualProgressBar = document.getElementById('manualProgressBar');
+            const startManualCountdownBtn = document.getElementById('startManualCountdown');
+            const resetManualCountdownBtn = document.getElementById('resetManualCountdown');
+            const closeManualCountdownBtn = document.getElementById('closeManualCountdown');
+            
+            let manualCountdownInterval;
+            let totalManualTime = 0;
+            let remainingManualTime = 0;
+            
+            timeContainer.addEventListener('click', function() {
+                resetManualCountdown();
+                manualCountdownOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeManualCountdownBtn.addEventListener('click', function() {
+                manualCountdownOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+                clearInterval(manualCountdownInterval);
+            });
+            
+            function startManualCountdown() {
+                const hours = parseInt(document.getElementById('manualHoursInput').value) || 0;
+                const minutes = parseInt(document.getElementById('manualMinutesInput').value) || 0;
+                const seconds = parseInt(document.getElementById('manualSecondsInput').value) || 0;
+                const ms = parseInt(document.getElementById('manualMsInput').value) || 0;
+                
+                totalManualTime = hours * 3600000 + minutes * 60000 + seconds * 1000 + ms * 10;
+                remainingManualTime = totalManualTime;
+                
+                if (totalManualTime <= 0) return;
+                
+                manualProgressBar.style.width = '100%';
+                clearInterval(manualCountdownInterval);
+                
+                // 使用requestAnimationFrame提高精度
+                function updateManualCountdown() {
+                    remainingManualTime -= 10; // 每10ms更新一次
+                    
+                    if (remainingManualTime <= 0) {
+                        clearInterval(manualCountdownInterval);
+                        manualCountdownDisplay.textContent = '00:00:00.00';
+                        manualProgressBar.style.width = '0%';
+                        return;
+                    }
+                    
+                    const hoursLeft = Math.floor(remainingManualTime / 3600000);
+                    const minutesLeft = Math.floor((remainingManualTime % 3600000) / 60000);
+                    const secondsLeft = Math.floor((remainingManualTime % 60000) / 1000);
+                    const msLeft = Math.floor((remainingManualTime % 1000) / 10);
+                    
+                    manualCountdownDisplay.textContent = 
+                        `${hoursLeft.toString().padStart(2, '0')}:${minutesLeft.toString().padStart(2, '0')}:${secondsLeft.toString().padStart(2, '0')}.${msLeft.toString().padStart(2, '0')}`;
+                    
+                    const progressPercentage = (remainingManualTime / totalManualTime) * 100;
+                    manualProgressBar.style.width = `${progressPercentage}%`;
+                }
+                
+                updateManualCountdown();
+                manualCountdownInterval = setInterval(updateManualCountdown, 10);
+            }
+            
+            function resetManualCountdown() {
+                clearInterval(manualCountdownInterval);
+                manualCountdownDisplay.textContent = '00:00:00.00';
+                manualProgressBar.style.width = '0%';
+                document.getElementById('manualHoursInput').value = '';
+                document.getElementById('manualMinutesInput').value = '';
+                document.getElementById('manualSecondsInput').value = '';
+                document.getElementById('manualMsInput').value = '';
+            }
+            
+            startManualCountdownBtn.addEventListener('click', startManualCountdown);
+            resetManualCountdownBtn.addEventListener('click', resetManualCountdown);
+            
+            // 位置编辑功能
+            const locationEditBtn = document.getElementById('locationEditBtn');
+            const locationEditOverlay = document.getElementById('locationEditOverlay');
+            const cancelLocationEdit = document.getElementById('cancelLocationEdit');
+            const confirmLocationEdit = document.getElementById('confirmLocationEdit');
+            
+            locationEditBtn.addEventListener('click', function() {
+                locationEditOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            cancelLocationEdit.addEventListener('click', function() {
+                locationEditOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            confirmLocationEdit.addEventListener('click', function() {
+                const selectedProvince = provinceSelect.value;
+                const selectedCity = citySelect.value;
+                
+                if (selectedProvince) {
+                    // 标记已手动设置位置
+                    manualLocationSet = true;
+                    userProvince = selectedProvince;
+                    userCity = selectedCity || '';
+                    
+                    // 更新位置显示
+                    document.getElementById('locationText').textContent = `${userProvince}${userCity}`;
+                    
+                    // 更新中考倒计时
+                    updateZhongkaoDisplay();
+                    
+                    // 如果选择了城市，尝试获取该城市的天气
+                    if (selectedCity) {
+                        const address = `${userProvince}${userCity}`;
+                        const cityUrl = `https://restapi.amap.com/v3/geocode/geo?address=${encodeURIComponent(address)}`;
+                        
+                        fetch(cityUrl, {
+                            method: 'GET',
+                            headers: createAmapHeaders()
+                        })
+                        .then(response => response.json())
+                        .then(geoData => {
+                            if (geoData.status === "1" && geoData.geocodes && geoData.geocodes.length > 0) {
+                                const adcode = geoData.geocodes[0].adcode;
+                                cityCode = adcode;
+                                return getWeatherByGaode(adcode);
+                            }
+                            return null;
+                        })
+                        .then(weatherData => {
+                            if (weatherData && weatherData.live) {
+                                updateWeatherDisplay(weatherData);
+                            }
+                        });
+                    }
+                }
+                
+                locationEditOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // 初始化标签
+            const tabsContainer = document.getElementById('tabs');
+            tabsConfig.forEach((tab, index) => {
+                const tabElement = document.createElement('div');
+                tabElement.className = `tab ${index === 0 ? 'active' : ''}`;
+                tabElement.setAttribute('data-tab', tab.tab_name);
+                
+                tabElement.innerHTML = `
+                    <svg class="tab-icon" viewBox="0 0 24 24">
+                        <path d="${tab.tab_icon}"/>
+                    </svg>
+                    <span>${tab.tab_name}</span>
+                `;
+                
+                tabsContainer.appendChild(tabElement);
+            });
+            
+            // 初始化网站卡片
+            function renderWebsites(tabName) {
+                const websitesContainer = document.getElementById('websitesContainer');
+                websitesContainer.innerHTML = '';
+                
+                const filteredWebsites = websitesConfig.filter(website => website.tab_name === tabName);
+                
+                filteredWebsites.forEach(website => {
+                    const websiteCard = document.createElement('div');
+                    websiteCard.className = 'website-card';
+                    websiteCard.onclick = () => {
+                        window.open(website.web_url, '_blank');
+                    };
+                    
+                    // 使用img标签加载本地PNG图标
+                    websiteCard.innerHTML = `
+                        <div class="website-icon">
+                            <img src="${website.web_icon}" alt="${website.web_name}的图标">
+                        </div>
+                        <div class="website-name">${website.web_name}</div>
+                    `;
+                    
+                    websitesContainer.appendChild(websiteCard);
+                });
+            }
+            
+            // 默认显示第一个标签的网站
+            renderWebsites(tabsConfig[0].tab_name);
+            
+            // 标签点击事件
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有标签的active类
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    // 为当前标签添加active类
+                    this.classList.add('active');
+                    
+                    // 渲染对应标签的网站
+                    const tabName = this.getAttribute('data-tab');
+                    renderWebsites(tabName);
+                });
+            });
+            
+            // 搜索功能
+            document.querySelector('.search-button').addEventListener('click', performSearch);
+            document.querySelector('.search-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const query = document.querySelector('.search-input').value.trim();
+                if (query) {
+                    window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank');
+                }
+            }
+            
+            // 每分钟更新一次倒计时（除了全屏状态）
+            setInterval(() => {
+                if (!examFullscreenOverlay.classList.contains('active')) {
+                    updateGaokaoDisplay();
+                    updateZhongkaoDisplay();
+                }
+            }, 60000);
+            
+            // 每30分钟更新一次天气信息
+            setInterval(() => {
+                getWeatherAndLocation();
+            }, 30 * 60 * 1000);
+        });
+    </script>
+    
+    
+    
+    </body></html>
